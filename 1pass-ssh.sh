@@ -23,17 +23,45 @@ echo "Help? $help"
 echo "Read? $readfile"
 echo "Write? $writefile"
 
+if [[ -n $help ]] && [[ -n $readfile ]] 
+then
+	inputerror=1
+elif [[ -n $help ]] && [[ -n $writefile ]]
+then
+	inputerror=1
+elif [[ -n $readfile ]] && [[ -n $writefile ]]
+then
+	inputerror=1
+fi
+
+if [[ -n $inputerror ]] ; then
+        echo "Please only enter one option"
+##	exit - Commented out for debugging...
+fi
+
 if [[ -n $help ]] ; then
 	echo "This is the Help File"
+	echo "Options are:"
+	echo "	-h|-help	Show this Help File"
+	echo "	-w|-write	Write the keys from 1Password to the Local .ssh folder"
+	echo "	-r|-read	Upload the keys from the Local .ssh folder to 1Password"
+fi
+
+##  This is the block to read files from the local files and upload to 1Password
+if [[ -n $readfile ]] ; then
+#        op create document .ssh/id_rsa --title SSH_Private
+#        op create document .ssh/id_rsa.pub --title SSH_Public
+        echo "Files Uploaded to 1Password"
+fi
+
+##  This is the block to write files from 1Password to the local files
+if [[ -n $writefile ]] ; then
+#	op get document SSH_Private 
+#	op get document SSH_Private
+        echo "Files Written to Local"
 fi
 
 
-
-##  Commands I will need to use:
-##op create document .ssh/id_rsa --title SSH_Private
-##op create document .ssh/id_rsa.pub --title SSH_Public
-
-##op get document SSH_Private
 
 
 
