@@ -6,20 +6,22 @@
 ## -w write exising 1Password "Documents" to the ~/.ssh directory as ssh key files (and fix any permissions, etc).
 
 
-#while [[ "$#" -gt 0 ]]; do
-#    case $1 in
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
 #        -h|--help) help=1; shift ;;
-#        -r|--readfile) readfile=1; shift ;;
-#	-w|--writefile) writefile=1;;
-#        *) echo "Unknown parameter passed: $1"; exit 1 ;;
-#    esac
-#    shift
-#done
+        -h|--help) help=1 ;;
+#        -r|--readfile) readfile=1 ; shift ;;
+        -r|--readfile) readfile=1  ;;
+	-w|--writefile) writefile=1;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
 
 echo "Test"
-#echo "Help? $help"
-#echo "Read? $readfile"
-#echo "Read? $readfile"
+echo "Help? $help"
+echo "Read? $readfile"
+echo "Write? $writefile"
 
 
 
