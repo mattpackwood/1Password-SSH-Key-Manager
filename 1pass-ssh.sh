@@ -23,7 +23,9 @@ echo "Help? $help"
 echo "Read? $readfile"
 echo "Write? $writefile"
 
-
+if [[ -n $help ]] ; then
+	echo "This is the Help File"
+fi
 
 
 
