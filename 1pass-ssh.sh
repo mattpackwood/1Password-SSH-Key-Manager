@@ -1,11 +1,19 @@
 #!/bin/bash
 
-## Start from here, need to read input, these should be
-## -h display help
-## -r read existing ssh key files from ~/.ssh and upload to 1Password as "Documents"
-## -w write exising 1Password "Documents" to the ~/.ssh directory as ssh key files (and fix any permissions, etc).
+##  This is intended as a wrapper for the 1Password "op" CLI tool, the issue
+##  it is intended to address is making it easier to store and retrieve SSH
+##  it assumes that you already have your 1Password CLI installed, set up
+##  and logged in / connected
+
+## Current options
+## -h 	display help
+## -r 	read existing ssh key files from ~/.ssh and upload to 1Password as
+##	"Documents" in your personal Vault
+## -w 	write exising 1Password "Documents" to the ~/.ssh directory as ssh key
+##	files (and fix any permissions, etc).
 
 
+## This code parses the command line options
 while [[ "$#" -gt 0 ]]; do
     case $1 in
 #        -h|--help) help=1; shift ;;
@@ -18,11 +26,7 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-echo "Test"
-echo "Help? $help"
-echo "Read? $readfile"
-echo "Write? $writefile"
-
+## This block decides what functions to use based on the options parsed
 if [[ -n $help ]] && [[ -n $readfile ]] 
 then
 	inputerror=1
@@ -39,6 +43,7 @@ if [[ -n $inputerror ]] ; then
 ##	exit - Commented out for debugging...
 fi
 
+## This is the function to print Help
 if [[ -n $help ]] ; then
 	echo "This is the Help File"
 	echo "Options are:"
@@ -47,21 +52,16 @@ if [[ -n $help ]] ; then
 	echo "	-r|-read	Upload the keys from the Local .ssh folder to 1Password"
 fi
 
-##  This is the block to read files from the local files and upload to 1Password
+## This is the function to read files from the local files and upload to 1Password
 if [[ -n $readfile ]] ; then
 #        op create document .ssh/id_rsa --title SSH_Private
 #        op create document .ssh/id_rsa.pub --title SSH_Public
         echo "Files Uploaded to 1Password"
 fi
 
-##  This is the block to write files from 1Password to the local files
+## This is the function to write files from 1Password to the local files
 if [[ -n $writefile ]] ; then
 #	op get document SSH_Private 
 #	op get document SSH_Private
         echo "Files Written to Local"
 fi
-
-
-
-
-
