@@ -40,7 +40,7 @@ fi
 
 if [[ -n $inputerror ]] ; then
         echo "Please only enter one option"
-##	exit - Commented out for debugging...
+	exit - Commented out for debugging...
 fi
 
 ## This is the function to print Help
@@ -54,14 +54,18 @@ fi
 
 ## This is the function to read files from the local files and upload to 1Password
 if [[ -n $readfile ]] ; then
-#        op create document .ssh/id_rsa --title SSH_Private
-#        op create document .ssh/id_rsa.pub --title SSH_Public
+        op create document .ssh/id_rsa --title SSH_Private
+        op create document .ssh/id_rsa.pub --title SSH_Public
         echo "Files Uploaded to 1Password"
 fi
 
 ## This is the function to write files from 1Password to the local files
 if [[ -n $writefile ]] ; then
-#	op get document SSH_Private 
-#	op get document SSH_Private
+	mkdir .ssh
+	op get document SSH_Private > .ssh/id_rsa 
+	op get document SSH_Public > .ssh/id_rsa.pub
+	chmod 755 .ssh
+	chmod 600 .ssh/id_rsa
+	chmod 644 .ssh/id_rsa.pub
         echo "Files Written to Local"
 fi
