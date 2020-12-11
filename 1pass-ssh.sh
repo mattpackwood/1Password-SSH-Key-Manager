@@ -12,7 +12,6 @@
 ## -w 	write exising 1Password "Documents" to the ~/.ssh directory as ssh key
 ##	files (and fix any permissions, etc).
 
-
 ## This code parses the command line options
 while [[ "$#" -gt 0 ]]; do
     case $1 in
